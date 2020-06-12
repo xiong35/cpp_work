@@ -228,12 +228,12 @@ void YH::set_account()
 void YH::saveuser()
 {
 	ofstream ofile("bankdat.dat", ios::out);   //以输出方式打开文件
-	ofstream outfile("bankdat.dat", ios::out); //以输出方式打开银行存款文件bankdat.data接收从内存输出的数据
+	ofstream outfile("bankdat.dat", ios::out); //以输出方式打开银行存款文件bankdat.dat接收从内存输出的数据
 	int n = 0;
 	outfile << useracnum << "  ";
 	for (; n < useracnum; n++)
 	{
-		outfile << useraccount[n]->ID << " "; //将信息写入bankdat.data文件
+		outfile << useraccount[n]->ID << " "; //将信息写入bankdat.dat文件
 		outfile << useraccount[n]->money << " ";
 		outfile << useraccount[n]->name << " ";
 		outfile << useraccount[n]->passwd << " ";
@@ -398,7 +398,7 @@ void YH::qu_account()
 	cout << "______________________________________________________________________" << endl;
 	for (; n < useracnum; n++)
 	{
-		cout << useraccount[n]->ID << "\t\t"; //将信息写出bankdat.data文件
+		cout << useraccount[n]->ID << "\t\t"; //将信息写出bankdat.dat文件
 		cout << useraccount[n]->money << "\t\t";
 		cout << useraccount[n]->name << "\t\t";
 		cout << useraccount[n]->passwd << endl;
@@ -456,6 +456,7 @@ void YH::show()
 
 int main(int argc, char const *argv[])
 {
-	/* code */
+	YH bank;
+	bank.show();
 	return 0;
 }
