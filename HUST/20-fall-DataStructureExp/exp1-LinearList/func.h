@@ -1,3 +1,6 @@
+#ifndef __FUNCS_OF_LINEARLIST
+#define __FUNCS_OF_LINEARLIST
+
 #include "def.h"
 
 status InitList(SqList& L);
@@ -35,3 +38,5 @@ status RemoveList(LISTS& Lists, char ListName[]);
 int LocateList(LISTS Lists, char ListName[]);
 
 int strcmp(char* a, char* b);
+
+#endif  // !__FUNCS_OF_LINEARLIST

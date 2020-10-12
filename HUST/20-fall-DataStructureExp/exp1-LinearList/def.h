@@ -1,5 +1,6 @@
 
 #ifndef __DEFS_OF_LINEARLIST
+#define __DEFS_OF_LINEARLIST
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +11,8 @@
 #define ERROR 0
 #define INFEASIBLE -1
 #define OVERFLOW -2
+
+#define FILE_NAME "list.dat"
 
 typedef int status;
 typedef int ElemType;  //数据元素类型定义

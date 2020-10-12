@@ -46,7 +46,7 @@ status ListEmpty(SqList L)
     return L.length == 0;
 }
 
-status ListLength(SqList L)
+int ListLength(SqList L)
 // 如果线性表L存在，返回线性表L的长度，否则返回INFEASIBLE。
 {
     if (L.elem == NULL)
@@ -172,9 +172,7 @@ status ListTraverse(SqList L)
         return INFEASIBLE;
 
     for (int i = 0; i < L.length; i++) {
-        printf("%d", L.elem[i]);
-        if (i != L.length - 1)
-            printf(" ");
+        printf("%d ", L.elem[i]);
     }
     return OK;
 }
@@ -198,6 +196,7 @@ status SaveList(SqList L, char FileName[])
 
     return OK;
 }
+
 status LoadList(SqList& L, char FileName[])
 // 如果线性表L不存在，将FileName文件中的数据读入到线性表L中，返回OK，否则返回INFEASIBLE。
 {
