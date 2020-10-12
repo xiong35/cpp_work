@@ -18,7 +18,8 @@ typedef int status;
 typedef int ElemType;  //数据元素类型定义
 
 #define LIST_INIT_SIZE 100
-#define LISTINCREMENT 10
+#define NAME_LEN 30
+#define MAX_LISTS 10
 
 typedef struct {  //顺序表（顺序结构）的定义
     ElemType* elem;
@@ -27,12 +28,12 @@ typedef struct {  //顺序表（顺序结构）的定义
 } SqList;
 
 typedef struct {
-    char name[30];
+    char name[NAME_LEN];
     SqList L;
 } Elem;
 
 typedef struct {  //线性表的管理表定义
-    Elem elem[10];
+    Elem elem[MAX_LISTS];
     int length;
 } LISTS;
 

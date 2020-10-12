@@ -58,21 +58,24 @@ int showMainMenu(LISTS& lists) {
             if (lists.length == 0)
                 printf("There is no list now.\n");
             else {
-                printf("len: %d", lists.elem[0].L.length);
                 int ind = getIndByName(lists);
-                printf("len: %d", lists.elem[0].L.length);
-                SaveList(lists.elem[ind - 1].L, FILE_NAME);
-                printf("len: %d", lists.elem[0].L.length);
+                if (SaveList(lists.elem[ind - 1].L, FILE_NAME) == OK)
+                    printf("success!\n");
+                else
+                    printf("fail!\n");
             }
             break;
 
-        case 5:
-            LoadList(lists.elem[lists.length++].L, FILE_NAME);
-            lists.elem[lists.length - 1].name[0] = 'l';
-            lists.elem[lists.length - 1].name[1] = 'o';
-            lists.elem[lists.length - 1].name[2] = 'a';
-            lists.elem[lists.length - 1].name[3] = 'd';
-            lists.elem[lists.length - 1].name[4] = 0;
+        case 5:;
+            if (LoadList(lists.elem[lists.length++].L, FILE_NAME) == OK) {
+                lists.elem[lists.length - 1].name[0] = 'l';
+                lists.elem[lists.length - 1].name[1] = 'o';
+                lists.elem[lists.length - 1].name[2] = 'a';
+                lists.elem[lists.length - 1].name[3] = 'd';
+                lists.elem[lists.length - 1].name[4] = 0;
+                printf("success!\n");
+            } else
+                printf("fail!\n");
             break;
 
         default:
@@ -143,7 +146,7 @@ void mutateList(LISTS& lists) {
                 break;
             case 2:
                 DestroyList(L);
-                break;
+                return;
             case 3:
                 printf("list length is: %d\n", ListLength(L));
                 break;

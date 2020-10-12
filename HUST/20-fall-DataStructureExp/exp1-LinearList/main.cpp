@@ -19,6 +19,11 @@
 int main(void) {
     LISTS theLists;
     theLists.length = 0;
+    for (int i = 0; i < MAX_LISTS; i++) {
+        theLists.elem[i].L.elem = NULL;
+        theLists.elem[i].L.length = 0;
+    }
+
     while (1) {
         if (showMainMenu(theLists) == 0)
             break;

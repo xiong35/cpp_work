@@ -218,6 +218,8 @@ status LoadList(SqList& L, char FileName[])
         count++;
     }
 
+    printf("count: %d", count);
+
     rewind(fp);
 
     L.elem = (ElemType*)malloc(count * sizeof(ElemType));
@@ -225,6 +227,8 @@ status LoadList(SqList& L, char FileName[])
     for (int i = 0; i < count; i++) {
         fscanf(fp, "%d ", L.elem + i);
     }
+
+    L.length = count;
 
     fclose(fp);
 
