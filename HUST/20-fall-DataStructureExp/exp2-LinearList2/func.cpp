@@ -259,23 +259,6 @@ status LoadList(LinkList& L, char FileName[]) {
     return OK;
 }
 
-int ListLength(LinkList L) {
-    // 如果线性表L存在，返回线性表L的长度，否则返回INFEASIBLE。
-    if (!L)
-        return INFEASIBLE;
-
-    int len = 0;
-
-    LinkList temp = L->next;
-
-    while (temp) {
-        temp = temp->next;
-        len++;
-    }
-
-    return len;
-}
-
 status AddList(Lists& lists, char ListName[]) {
     // 只需要在Lists中增加一个名称为ListName的空线性表
     // 线性表数据又后台测试程序插入。

@@ -41,7 +41,8 @@ int showMainMenu(Lists& lists) {
         case 2:
             printf("Please enter list name: ");
             scanf("%s", name);
-            if (AddList(lists, name) == OK)
+            if (AddList(lists, name) == OK &&
+                InitList(lists.lists[lists.length - 1]) == OK)
                 printf("success!\n");
             else
                 printf("fail!\n");
@@ -118,8 +119,8 @@ void mutateList(Lists& lists) {
         printf("|            3.  show list length              |\n");
         printf("|            4.  get an element                |\n");
         printf("|            5.  locate an element             |\n");
-        printf("|            6.  get the prior lists            |\n");
-        printf("|            7.  get the next lists             |\n");
+        printf("|            6.  get the prior lists           |\n");
+        printf("|            7.  get the next lists            |\n");
         printf("|            8.  insert an element             |\n");
         printf("|            9.  delete an element             |\n");
         printf("|            10. traverse this list            |\n");
