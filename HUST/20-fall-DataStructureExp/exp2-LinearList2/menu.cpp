@@ -1,7 +1,7 @@
 
 #include "menu.h"
 
-int showMainMenu(LISTS& lists) {
+int showMainMenu(Lists& lists) {
     system(CLEAR);
 
     printf("=================================================\n");
@@ -59,7 +59,7 @@ int showMainMenu(LISTS& lists) {
                 printf("There is no list now.\n");
             else {
                 int ind = getIndByName(lists);
-                if (SaveList(lists.elem[ind - 1].L, FILE_NAME) == OK)
+                if (SaveList(lists.lists[ind - 1], FILE_NAME) == OK)
                     printf("success!\n");
                 else
                     printf("fail!\n");
@@ -67,12 +67,12 @@ int showMainMenu(LISTS& lists) {
             break;
 
         case 5:;
-            if (LoadList(lists.elem[lists.length++].L, FILE_NAME) == OK) {
-                lists.elem[lists.length - 1].name[0] = 'l';
-                lists.elem[lists.length - 1].name[1] = 'o';
-                lists.elem[lists.length - 1].name[2] = 'a';
-                lists.elem[lists.length - 1].name[3] = 'd';
-                lists.elem[lists.length - 1].name[4] = 0;
+            if (LoadList(lists.lists[lists.length++], FILE_NAME) == OK) {
+                lists.names[lists.length - 1][0] = 'l';
+                lists.names[lists.length - 1][1] = 'o';
+                lists.names[lists.length - 1][2] = 'a';
+                lists.names[lists.length - 1][3] = 'd';
+                lists.names[lists.length - 1][4] = 0;
                 printf("success!\n");
             } else
                 printf("fail!\n");
@@ -85,7 +85,7 @@ int showMainMenu(LISTS& lists) {
     return 1;
 }
 
-int getIndByName(const LISTS& lists) {
+int getIndByName(const Lists& lists) {
     char name[30];
     int ind = 0;
     while (1) {
@@ -100,26 +100,26 @@ int getIndByName(const LISTS& lists) {
     }
 }
 
-void mutateList(LISTS& lists) {
+void mutateList(Lists& lists) {
     printf("Please enter a name: \n");
     printf("Availiable names are: \n");
     int ind = getIndByName(lists);
-    SqList& L = lists.elem[ind - 1].L;
+    LinkList& L = lists.lists[ind - 1];
     while (1) {
         int mutation;
 
         system(CLEAR);
         printf("================================================\n");
         printf("|      Availiable Mutations On %-10s      |\n",
-               lists.elem[ind - 1].name);
+               lists.names[ind - 1]);
         printf("================================================\n");
         printf("|            1.  clear this list               |\n");
         printf("|            2.  destroy this list             |\n");
         printf("|            3.  show list length              |\n");
         printf("|            4.  get an element                |\n");
         printf("|            5.  locate an element             |\n");
-        printf("|            6.  get the prior elem            |\n");
-        printf("|            7.  get the next elem             |\n");
+        printf("|            6.  get the prior lists            |\n");
+        printf("|            7.  get the next lists             |\n");
         printf("|            8.  insert an element             |\n");
         printf("|            9.  delete an element             |\n");
         printf("|            10. traverse this list            |\n");
@@ -147,7 +147,7 @@ void mutateList(LISTS& lists) {
             case 2:
                 DestroyList(L);
                 for (int i = ind; i < lists.length; i++) {
-                    lists.elem[i - 1] = lists.elem[i];
+                    lists.lists[i - 1] = lists.lists[i];
                 }
                 lists.length--;
                 return;
@@ -232,8 +232,8 @@ void mutateList(LISTS& lists) {
     }
 }
 
-void showListsNames(const LISTS& lists) {
+void showListsNames(const Lists& lists) {
     for (int i = 0; i < lists.length; i++) {
-        printf("%d.  %s\n", i + 1, lists.elem[i].name);
+        printf("%d.  %s\n", i + 1, lists.names[i]);
     }
 }

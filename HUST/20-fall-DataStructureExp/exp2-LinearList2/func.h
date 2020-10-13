@@ -30,6 +30,16 @@ status ListTraverse(LinkList L);
 
 status SaveList(LinkList L, char FileName[]);
 
+int ListLength(LinkList L);
+
 status LoadList(LinkList& L, char FileName[]);
+
+status AddList(Lists& lists, char ListName[]);
+
+int strcmp(char* a, char* b);
+
+status RemoveList(Lists& lists, char ListName[]);
+
+int LocateList(Lists lists, char ListName[]);
 
 #endif  // !__DEF_OF_FUNCS

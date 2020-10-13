@@ -258,3 +258,77 @@ status LoadList(LinkList& L, char FileName[]) {
 
     return OK;
 }
+
+int ListLength(LinkList L) {
+    // 如果线性表L存在，返回线性表L的长度，否则返回INFEASIBLE。
+    if (!L)
+        return INFEASIBLE;
+
+    int len = 0;
+
+    LinkList temp = L->next;
+
+    while (temp) {
+        temp = temp->next;
+        len++;
+    }
+
+    return len;
+}
+
+status AddList(Lists& lists, char ListName[]) {
+    // 只需要在Lists中增加一个名称为ListName的空线性表
+    // 线性表数据又后台测试程序插入。
+    if (lists.length == MAX_LISTS)
+        return ERROR;
+
+    int i = 0;
+    do {
+        lists.names[lists.length][i] = ListName[i];
+    } while (ListName[i++]);
+
+    lists.length++;
+
+    return OK;
+}
+
+int strcmp(char* a, char* b) {
+    int i = 0;
+    while (1) {
+        if (a[i] != b[i])
+            return 0;
+        else if (a[i] == 0 && b[i] == 0)
+            return 1;
+        else if (a[i] == 0 || b[i] == 0)
+            return 0;
+        else
+            i++;
+    }
+}
+
+status RemoveList(Lists& lists, char ListName[]) {
+    // lists中删除一个名称为ListName的线性表
+    int i = 0;
+    for (; i < lists.length; i++) {
+        if (strcmp(lists.names[i], ListName))
+            break;
+    }
+    if (i >= lists.length)
+        return ERROR;
+
+    for (; i + 1 < lists.length + 1; i++) {
+        lists.lists[i] = lists.lists[i + 1];
+    }
+
+    return OK;
+}
+
+int LocateList(Lists Lists, char ListName[]) {
+    // 在Lists中查找一个名称为ListName的线性表，成功返回逻辑序号，否则返回0
+    for (int i = 0; i < Lists.length; i++) {
+        if (strcmp(Lists.names[i], ListName))
+            return i + 1;
+    }
+
+    return 0;
+}
