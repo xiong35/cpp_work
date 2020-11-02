@@ -1,6 +1,6 @@
 
-#ifndef __MENU_FOR_LINEARLOIST
-#define __MENU_FOR_LINEARLOIST
+#ifndef __MENU_FOR_LINEARLIST
+#define __MENU_FOR_LINEARLIST
 
 #include <stdio.h>
 #include <windows.h>
@@ -17,4 +17,4 @@ void mutateList(Lists& lists);
 
 void showListsNames(const Lists& lists);
 
-#endif  // !__MENU_FOR_LINEARLOIST
+#endif  // !__MENU_FOR_LINEARLIST
