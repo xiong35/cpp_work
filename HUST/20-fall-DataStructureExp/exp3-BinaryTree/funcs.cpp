@@ -332,8 +332,6 @@ int PreOrderTraverse_2(BiTree f, FILE* fp, int flag) {
         }
         return OK;
     }
-    printf("data: %s\n", data.others);
-
     BiTree child = (BiTree)malloc(sizeof(BiTNode));
     child->data.key = data.key;
     strcpy(child->data.others, data.others);

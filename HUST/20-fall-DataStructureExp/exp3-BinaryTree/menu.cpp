@@ -5,12 +5,12 @@ int showMainMenu(Trees& trees) {
     system(CLEAR);
 
     printf("=================================================\n");
-    printf("|      Availiable Mutations On Linearlist       |\n");
+    printf("|      Availiable Mutations On BinaryTree       |\n");
     printf("=================================================\n");
     printf("|             1. show all trees' names          |\n");
-    printf("|             2. load a list                    |\n");
-    printf("|             3. select a list(and mutate it)   |\n");
-    printf("|             4. save a list                    |\n");
+    printf("|             2. load a tree                    |\n");
+    printf("|             3. select a tree(and mutate it)   |\n");
+    printf("|             4. save a tree                    |\n");
     printf("|             0. exit                           |\n");
     printf("=================================================\n");
 
@@ -32,7 +32,7 @@ int showMainMenu(Trees& trees) {
 
         case 1:
             if (trees.length == 0)
-                printf("There is no list now.\n");
+                printf("There is no tree now.\n");
             else
                 showTreesNames(trees);
             break;
@@ -50,14 +50,14 @@ int showMainMenu(Trees& trees) {
 
         case 3:
             if (trees.length == 0)
-                printf("There is no list now.\n");
+                printf("There is no tree now.\n");
             else
                 mutateTree(trees);
             break;
 
         case 4:
             if (trees.length == 0)
-                printf("There is no list now.\n");
+                printf("There is no tree now.\n");
             else {
                 printf("enter the file name: ");
                 scanf("%s", name);
@@ -80,13 +80,13 @@ int getIndByName(const Trees& trees) {
     int ind = 0;
     while (1) {
         showTreesNames(trees);
-        printf("Please enter the list's name: ");
+        printf("Please enter the tree's name: ");
         scanf("%s", name);
         for (int i = 0; i < trees.length; i++) {
             if (strcmp(trees.names[i], name) == 0)
                 return i;
         }
-        printf("No such list, try again\n");
+        printf("No such tree, try again\n");
     }
 }
 
@@ -149,13 +149,13 @@ void mutateTree(Trees& trees) {
                 printf(
                     "please enter the parent key, LR, elem key and elem "
                     "name: ");
-                scanf("%d %d %d", &e, &LR, &c.key, &c.others);
+                scanf("%d %d %d %s", &e, &LR, &c.key, &c.others);
                 res = InsertNode(curTree, e, LR, c);
                 if (res == OK)
                     printf("success\n");
                 else
                     printf("fail!\n");
-                return;
+                break;
             case 3:
                 printf("tree depth is: %d\n", BiTreeDepth(curTree));
                 break;
