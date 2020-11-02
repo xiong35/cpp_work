@@ -16,9 +16,9 @@ int showMainMenu(Trees& trees) {
 
     int mutation = 0;
     while (1) {
-        printf("Your choice is[0~5]: ");
+        printf("Your choice is[0~4]: ");
         scanf("%d", &mutation);
-        if (mutation > 5 || mutation < 0)
+        if (mutation > 4 || mutation < 0)
             printf("please enter a num between 0 and 5\n");
         else
             break;
@@ -38,12 +38,13 @@ int showMainMenu(Trees& trees) {
             break;
 
         case 2:
-            printf("Please enter list name: ");
+            printf("Please enter file name: ");
             scanf("%s", name);
             if (trees.length < MAX_TREES &&
-                LoadBiTree(trees.trees[trees.length], name) == OK)
+                LoadBiTree(trees.trees[trees.length], name) == OK) {
+                strcpy(trees.names[trees.length++], name);
                 printf("success!\n");
-            else
+            } else
                 printf("fail!\n");
             break;
 
@@ -74,28 +75,6 @@ int showMainMenu(Trees& trees) {
     return 1;
 }
 
-int strcmp(char* a, char* b) {
-    int i = 0;
-    while (1) {
-        if (a[i] != b[i])
-            return 0;
-        else if (a[i] == 0 && b[i] == 0)
-            return 1;
-        else if (a[i] == 0 || b[i] == 0)
-            return 0;
-        else
-            i++;
-    }
-}
-
-int getTreeIndByName(const Trees& trees, const char* name) {
-    for (int i = 0; i < trees.length; i++) {
-        if (strcmp(trees.names[i], name))
-            return i;
-    }
-    return -1;
-}
-
 int getIndByName(const Trees& trees) {
     char name[30];
     int ind = 0;
@@ -104,7 +83,7 @@ int getIndByName(const Trees& trees) {
         printf("Please enter the list's name: ");
         scanf("%s", name);
         for (int i = 0; i < trees.length; i++) {
-            if (strcmp(trees.names[i], name))
+            if (strcmp(trees.names[i], name) == 0)
                 return i;
         }
         printf("No such list, try again\n");
@@ -137,15 +116,15 @@ void mutateTree(Trees& trees) {
         printf("|            7.  deleate a node                |\n");
         printf("|            8.  pre order traverse            |\n");
         printf("|            9.  in order traverse             |\n");
-        printf("|            10. postorder traverse           |\n");
-        printf("|            11. level order traverse           |\n");
+        printf("|            10. postorder traverse            |\n");
+        printf("|            11. level order traverse          |\n");
         printf("|            0.  exit                          |\n");
         printf("================================================\n");
 
         while (1) {
-            printf("Your choice is[0~10]: ");
+            printf("Your choice is[0~11]: ");
             scanf("%d", &mutation);
-            if (mutation > 10 || mutation < 0)
+            if (mutation > 11 || mutation < 0)
                 printf("Invalid mutation, please try again");
             else
                 break;
@@ -162,9 +141,10 @@ void mutateTree(Trees& trees) {
                 ClearBiTree(curTree);
                 for (int i = ind; i < trees.length; i++) {
                     strcpy(trees.names[i], trees.names[i + 1]);
+                    trees.trees[i] = trees.trees[i + 1];
                 }
                 trees.length--;
-                break;
+                return;
             case 2:
                 printf(
                     "please enter the parent key, LR, elem key and elem "
@@ -192,7 +172,7 @@ void mutateTree(Trees& trees) {
             case 5:
                 printf(
                     "Enter the old key, new key and new name of the target: ");
-                scanf("%d %d %d", &e, &c.key, &c.others);
+                scanf("%d %d %s", &e, &c.key, &c.others);
                 res = Assign(curTree, e, c);
                 if (res == OK)
                     printf("success!\n");

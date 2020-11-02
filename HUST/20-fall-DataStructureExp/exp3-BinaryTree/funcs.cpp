@@ -169,14 +169,9 @@ status InsertNode(BiTree& T, KeyType e, int LR, TElemType c) {
     return OK;
 }
 
-BiTNode* LocateNode_2(BiTree T) {
-    if (!T->rchild)
-        return T;
-    BiTree t = NULL;
-    t = LocateNode_2(T->rchild);
-    return t;
-}
-
+#pragma region
+BiTNode* LocateNode_1(BiTree T, KeyType e);
+BiTNode* LocateNode_2(BiTree T);
 status DeleteNode(BiTree& T, KeyType e) {
     //删除结点。此题允许通过增加其它函数辅助实现本关任务
     BiTree E = T;
@@ -194,7 +189,7 @@ status DeleteNode(BiTree& T, KeyType e) {
         return OK;
     }
     BiTree t;
-    t = LocateNode(T, e);
+    t = LocateNode_1(T, e);
     if (!t)
         return ERROR;
     int flag;
@@ -229,6 +224,35 @@ status DeleteNode(BiTree& T, KeyType e) {
     free(E);
     return OK;
 }
+
+BiTNode* LocateNode_1(BiTree T, KeyType e) {
+    //查找e的父亲节点
+    if (T->lchild && T->lchild->data.key == e)
+        return T;
+    if (T->rchild && T->rchild->data.key == e)
+        return T;
+    if (!T->lchild && !T->rchild)
+        return NULL;
+    BiTree t = NULL;
+    if (T->lchild)
+        t = LocateNode_1(T->lchild, e);
+    if (t)
+        return t;
+    if (T->rchild)
+        t = LocateNode_1(T->rchild, e);
+    if (t)
+        return t;
+    return t;
+}
+
+BiTNode* LocateNode_2(BiTree T) {
+    if (!T->rchild)
+        return T;
+    BiTree t = NULL;
+    t = LocateNode_2(T->rchild);
+    return t;
+}
+#pragma endregion
 
 status PreOrderTraverse(BiTree T, void (*visit)(BiTree)) {
     //先序遍历二叉树T
@@ -298,8 +322,8 @@ status PreOrderTraverse_1(BiTree T, FILE* fp) {
 
 int PreOrderTraverse_2(BiTree f, FILE* fp, int flag) {
     TElemType data;
-    fscanf(fp, "%d", &data.key);
-    fscanf(fp, "%s", data.others);
+    if (fscanf(fp, "%d %s", &data.key, data.others) != 2)
+        return OK;
     if (data.key == 0) {
         if (flag) {
             f->rchild = NULL;
@@ -308,6 +332,8 @@ int PreOrderTraverse_2(BiTree f, FILE* fp, int flag) {
         }
         return OK;
     }
+    printf("data: %s\n", data.others);
+
     BiTree child = (BiTree)malloc(sizeof(BiTNode));
     child->data.key = data.key;
     strcpy(child->data.others, data.others);
