@@ -5,7 +5,7 @@
 #include <iostream>
 #include "def.h"
 
-void strcpy(char* dest, const char* src);
+// void strcpy(char* dest, const char* src);
 
 void CreateBiTreeWithInd(BiTree& T, TElemType* definition, int& curDef);
 
