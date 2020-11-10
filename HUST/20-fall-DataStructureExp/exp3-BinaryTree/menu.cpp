@@ -98,7 +98,7 @@ void mutateTree(Trees& trees) {
     printf("Please enter a name: \n");
     printf("Availiable names are: \n");
     int ind = getIndByName(trees);
-    BiTree curTree = trees.trees[ind];
+    BiTree& curTree = trees.trees[ind];
     while (1) {
         int mutation;
 
@@ -150,7 +150,7 @@ void mutateTree(Trees& trees) {
                     "please enter the parent key, LR, elem key and elem "
                     "name: ");
                 scanf("%d %d %d %s", &e, &LR, &c.key, &c.others);
-                res = InsertNode(curTree, e, LR, c);
+                res = InsertNode(trees.trees[ind], e, LR, c);
                 if (res == OK)
                     printf("success\n");
                 else

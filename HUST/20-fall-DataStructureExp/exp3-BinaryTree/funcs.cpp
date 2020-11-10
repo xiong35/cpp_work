@@ -119,9 +119,6 @@ BiTNode* GetSibling(BiTree T, KeyType e) {
     if (!T)
         return NULL;
 
-    if (!T->rchild || !T->lchild)
-        return NULL;
-
     if (T->lchild->data.key == e)
         return T->rchild;
     if (T->rchild->data.key == e)
